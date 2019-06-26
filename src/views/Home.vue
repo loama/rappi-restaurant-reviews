@@ -21,6 +21,7 @@ export default {
 <style lang="sass">
   .iphonex
     left: calc(50vw - 160px)
+    pointer-events: none
     position: absolute
     top: 8px
     width: 320px
