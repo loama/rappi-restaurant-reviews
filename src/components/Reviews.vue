@@ -37,7 +37,27 @@
         </div>
       </div>
 
-      <div class="card dishes"></div>
+      <div class="card dishes">
+        <div class="dish">
+          <div class="dish-name">Hamburguesa Rockefeller</div>
+          <div class="thumbs-up"></div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-name">Hamburguesa Gorgory</div>
+          <div class="thumbs-up"></div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-name">Malteada de Vainilla</div>
+          <div class="thumbs-up"></div>
+        </div>
+
+        <div class="dish">
+          <div class="dish-name">Animal Fries</div>
+          <div class="thumbs-up"></div>
+        </div>
+      </div>
 
       <div class="card thanks"></div>
     </div>
@@ -57,7 +77,8 @@
          v-bind:class="[current_step_in_letters, next_active ? 'active' : '']"> {{next_text}} </div>
 
     <div class="status-all"></div>
-    <div class="status-current"></div>
+    <div class="status-current"
+         v-bind:class="current_step_in_letters"></div>
 
   </div>
 </template>
@@ -181,7 +202,31 @@ export default {
               width: 40px
 
       &.dishes
+        height: 200px
         left: 256px
+        padding: 40px 16px 16px 16px
+        text-align: left
+        width: 208px
+
+        .dish
+          display: inline-block
+          height: 40px
+          margin-top: 24px
+          vertical-align: center
+
+          .dish-name
+            border: 1px solid black
+            width: 160px
+
+        .thumbs-up
+          display: inline-block
+          height: 44px
+          width: 44px
+
+        .thumbs-down
+          display: inline-block
+          height: 44px
+          width: 44px
 
       &.thanks
         left: 512px
@@ -220,6 +265,7 @@ export default {
       height: 48px
       left: 12px
       line-height: 48px
+      opacity: 0.5
       pointer-events: none
       position: absolute
       transform: translate3d(0, 0, 0)
@@ -227,6 +273,7 @@ export default {
       width: 256px
 
       &.active
+        opacity: 1
         pointer-events: all
 
       &.one
@@ -251,4 +298,13 @@ export default {
       position: absolute
       transition: all 0.3s
       width: 40px
+
+      &.zero
+        width: 85px
+
+      &.one
+        width: 170px
+
+      &.two
+        width: 256px
 </style>
