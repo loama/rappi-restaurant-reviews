@@ -1,5 +1,5 @@
 <template>
-  <div class="reviews">
+  <div class="reviews" v-bind:class="current_step_in_letters">
     <div class="cards" v-bind:class="current_step_in_letters">
       <div class="card restaurant">
         <span class="title">¿Qué tal estuvo tu experiencia?</span>
@@ -40,22 +40,47 @@
       <div class="card dishes">
         <div class="dish">
           <div class="dish-name">Hamburguesa Rockefeller</div>
-          <div class="thumbs-up"></div>
+          <div class="thumbs-down"
+               v-bind:class="{active: dish_review_one === 'negative'}"
+               v-on:click="dish_review_one = 'negative'">
+            <img src="../assets/thumbs-down.png">
+          </div>
+
+          <div class="thumbs-up"
+               v-bind:class="{active: dish_review_one === 'positive'}"
+               v-on:click="dish_review_one = 'positive'">
+            <img src="../assets/thumbs-up.png">
+          </div>
         </div>
 
         <div class="dish">
           <div class="dish-name">Hamburguesa Gorgory</div>
-          <div class="thumbs-up"></div>
+          <div class="thumbs-down"
+               v-bind:class="{active: dish_review_two === 'negative'}"
+               v-on:click="dish_review_two = 'negative'">
+            <img src="../assets/thumbs-down.png">
+          </div>
+
+          <div class="thumbs-up"
+               v-bind:class="{active: dish_review_two === 'positive'}"
+               v-on:click="dish_review_two = 'positive'">
+            <img src="../assets/thumbs-up.png">
+          </div>
         </div>
 
         <div class="dish">
           <div class="dish-name">Malteada de Vainilla</div>
-          <div class="thumbs-up"></div>
-        </div>
+          <div class="thumbs-down"
+               v-bind:class="{active: dish_review_three === 'negative'}"
+               v-on:click="dish_review_three = 'negative'">
+            <img src="../assets/thumbs-down.png">
+          </div>
 
-        <div class="dish">
-          <div class="dish-name">Animal Fries</div>
-          <div class="thumbs-up"></div>
+          <div class="thumbs-up"
+               v-bind:class="{active: dish_review_three === 'positive'}"
+               v-on:click="dish_review_three = 'positive'">
+            <img src="../assets/thumbs-up.png">
+          </div>
         </div>
       </div>
 
@@ -91,8 +116,10 @@ export default {
         return 'zero'
       } else if (this.current_step === 1) {
         return 'one'
-      } else {
+      } else if (this.current_step === 2) {
         return 'two'
+      } else {
+        return 'closed'
       }
     },
     dish_review_valid () {
@@ -107,15 +134,19 @@ export default {
         return true
       } else if (this.current_step === 1 && this.dish_review_valid) {
         return true
+      } else if (this.current_step === 2) {
+        return true
       } else {
         return false
       }
     },
     next_text () {
-      if (this.current_step < 1) {
+      if (this.current_step === 0) {
         return 'Siguiente'
-      } else {
+      } else if (this.current_step === 1) {
         return 'Terminar'
+      } else {
+        return 'Cerrar'
       }
     }
   },
@@ -138,12 +169,18 @@ export default {
     background: rgba(250, 250, 250, 0.92)
     height: 584px
     left: calc(50vw - 140px)
+    opacity: 1
     overflow: hidden
     padding-top: 24px
     position: absolute
+    transition: all 0.3s
     top: 24px
     width: 280px
     z-index: 2
+
+    &.closed
+      pointer-events: none
+      opacity: 0
 
     .restaurant-img
       background: #F7EA5F
@@ -202,31 +239,48 @@ export default {
               width: 40px
 
       &.dishes
+        color: #323232
         height: 200px
         left: 256px
-        padding: 40px 16px 16px 16px
+        padding: 40px 8px 16px 8px
         text-align: left
-        width: 208px
+        width: 224px
 
         .dish
-          display: inline-block
           height: 40px
           margin-top: 24px
           vertical-align: center
 
           .dish-name
-            border: 1px solid black
-            width: 160px
+            display: inline-block
+            vertical-align: top
+            width: 128px
 
         .thumbs-up
           display: inline-block
           height: 44px
+          opacity: 0.3
           width: 44px
+
+          img
+            margin: 8px
+            width: 32px
+
+          &.active
+            opacity: 1
 
         .thumbs-down
           display: inline-block
           height: 44px
+          opacity: 0.3
           width: 44px
+
+          img
+            margin: 8px
+            width: 32px
+
+          &.active
+            opacity: 1
 
       &.thanks
         left: 512px
