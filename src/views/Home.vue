@@ -20,16 +20,16 @@ export default {
 
 <style lang="sass">
   .iphonex
+    left: calc(50vw - 160px)
     position: absolute
     top: 8px
-    left: calc(50vw - 160px)
     width: 320px
     z-index: 20
 
   .rappi_background
+    left: calc(50vw - 140px)
     position: absolute
     top: 24px
-    left: calc(50vw - 140px)
     width: 280px
     z-index: 1
 </style>
