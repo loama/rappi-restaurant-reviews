@@ -84,7 +84,10 @@
         </div>
       </div>
 
-      <div class="card thanks"></div>
+      <div class="card thanks">
+        <div class="thanks-title">¡Gracias!</div>
+        <div class="thanks-details">Tus comentarios nos ayudan a mejorar</div>
+      </div>
     </div>
 
     <div class="restaurant-img">
@@ -284,6 +287,16 @@ export default {
 
       &.thanks
         left: 512px
+        padding-top: 40px
+        height: 120px
+
+        .thanks-title
+          font-family: 'CircularStd-Bold'
+          font-size: 28px
+
+        .thanks-details
+          color: #898989
+          margin-top: 8px
 
     .title
       display: block
